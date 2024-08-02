@@ -12,11 +12,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'  # Use the Node.js version your project requires
+        node-version: '14'
         
     - run: npm install
-    - run: npm test
+    
+    - name: Fix Jest Permissions
+      run: chmod +x ./node_modules/.bin/jest
+    
+    - run: npx jest
